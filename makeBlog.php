@@ -4,18 +4,14 @@ declare(strict_types=1);
 session_start();
 include "./functions/database.php";
 include "./functions/helpers.php";
+include "classes/DB.php";
+include "classes/Blog.php";
 
 if (empty($_SESSION["id"])) {
     header("location: login.php");
 }
 
-$connection = dbConnect(
-    user: "root",
-    pass: "",
-    db: "blog",
-);
-
-$id = $_SESSION["id"];
+$user_id = $_SESSION["id"];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -32,7 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errorcounter++;
         }
         if ($errorcounter == 0) {
-            createBlog($connection, $id, $title, $detail);
+           $blog = new Blog($user_id, $_POST["title"], $_POST["detail"]);
+          
+           $blog->addBlog();
         }
     }
 }
@@ -56,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <td><input type="text" name="title" id="title"> </td>
             </tr>
             <tr>
-                <td><label>detail</label></td>
+                <td><label>detaillllls</label></td>
                 <td>
                     <textarea id="detail" name="detail" rows="4" cols="50">
 

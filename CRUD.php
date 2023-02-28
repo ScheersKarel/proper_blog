@@ -4,20 +4,17 @@ declare(strict_types=1);
 
 include "./functions/database.php";
 include "./functions/helpers.php";
+include "classes/DB.php";
+include "classes/Blog.php";
 
 session_start();
 if (empty($_SESSION["id"])) {
     header("location: login.php");
 }
 
-$connection = dbConnect(
-    user: "root",
-    pass: "",
-    db: "blog",
-);
 
-$blog = getMyBlogs($connection, $_SESSION["id"]);
-echo $_SESSION["id"];
+$blog = Blog::getMyBlogs($_SESSION["id"]);
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['detail'])) {

@@ -1,25 +1,5 @@
 <?php
 
-    function getAllBlogs(PDO $connection):array
-    {
-       $blog = $connection->query("SELECT * FROM blogs WHERE active = 1")-> fetchAll();
-
-        return $blog;
-    }
-
-    function getMyBlogs(PDO $connection, $id):array
-    {
-       $blog = $connection->query("SELECT * FROM blogs WHERE active = 1 AND user_id = $id")-> fetchAll();
-
-        return $blog;
-    }
-    function getSelectedBlogs(PDO $connection, $id):array
-    {
-       $blog = $connection->query("SELECT * FROM blogs WHERE active = 1 AND id = $id")-> fetchAll();
-
-        return $blog;
-    }
-
     function likeBlog(PDO $connection, string $blog_id, string $user_id): void
     {
     try{

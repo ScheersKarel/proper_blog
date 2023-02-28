@@ -1,0 +1,47 @@
+.container {
+    width: 80%;
+    margin: 0px auto;
+    background-color: rgb(218, 217, 217);
+    padding: 10px;
+}
+
+
+nav {
+    margin-left: 55%;
+    font-size: larger;
+
+}
+
+#like {
+    margin-left: 5%;
+
+}
+
+.title {
+    text-align: center;
+}
+
+.detail {
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+h2 {
+    text-align: center;
+}
+
+button {
+    background-color: rgb(218, 217, 217);
+    border: none;
+}
+
+.error {
+    color: red;
+}

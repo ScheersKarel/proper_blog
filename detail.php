@@ -3,6 +3,8 @@ session_start();
 
 include "./functions/database.php";
 include "./functions/helpers.php";
+include "classes/DB.php";
+include "classes/Blog.php";
 
 $connection = dbConnect(
     user: "root",
@@ -10,7 +12,8 @@ $connection = dbConnect(
     db: "blog",
 );
 
-$blog = getSelectedBlogs($connection, $_SESSION["blog_id"]);
+$blog = Blog::getSelectedBlogs($_SESSION["blog_id"]);
+
 $user_id = $_SESSION["id"];
 $blog_id = $_SESSION["blog_id"];
 if(isset($_POST['like']))

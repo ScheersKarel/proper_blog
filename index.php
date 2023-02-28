@@ -3,6 +3,9 @@ declare(strict_types = 1);
 
 include "./functions/database.php";
 include "./functions/helpers.php";
+include "classes/DB.php";
+include "classes/Blog.php";
+
 session_start();
 
 $connection = dbConnect(
@@ -10,7 +13,8 @@ $connection = dbConnect(
     pass: "",
     db: "blog",
 );
-$blog = getAllBlogs($connection);
+
+$blog = Blog::getBlogs();
 
 
 

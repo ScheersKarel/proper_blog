@@ -2,12 +2,17 @@
 session_start();
 include "./functions/database.php";
 include "./functions/helpers.php";
+include "classes/DB.php";
+include "classes/User.php";
+
+
 
 $connection = dbConnect(
     user: "root",
     pass: "",
     db: "blog",
 );
+
 
 $voornaamError = "";
 $achternaamError = "";
@@ -63,7 +68,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION["password"] = $password;
         }
         if ($errorcount == 0) {
-            registreer($connection, $first_name, $last_name, $email, $password);
+            $user = new User($first_name, $last_name, $email, $password);
+            $user -> addUser();
+            
         }
     }
 }

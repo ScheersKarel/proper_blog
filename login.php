@@ -45,10 +45,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (password_verify($password, $res[0])) {
                 $_SESSION["id"] = $id[0];
                 header("location: CRUD.php");
-            } else {
+            } 
+            
+            else {
                 $emailError = "email and/or wachtwoord are incorrect";
             }
-        } else {
+        } 
+        
+        else {
             $emailError =  "email bestaat niet";
         }
     }

@@ -54,6 +54,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
                         <button type="submit" name="detail" >
                         <h2> <?php echo $blog["title"]; ?></h2>
                         </button>
+                
                         
                 </div>
             </form>

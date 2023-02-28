@@ -43,7 +43,7 @@ $likes = $getLikes->fetch();
 <body>
     <?php
     foreach ($blog as $blog) : ?>
-        <?php if ($blog["active"] == 1) :  ?>
+       
             <h2>
                 <?php echo $blog["title"]; ?>
             </h2>
@@ -55,7 +55,7 @@ $likes = $getLikes->fetch();
                 <button type = "submit" name = "like" >like</button>
                 <?= $likes[0]." likes" ?>
             </form>
-            <?php endif; ?>
+           
         <?php endif; ?>
     <?php endforeach; ?>
 </body>

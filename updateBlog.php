@@ -13,7 +13,7 @@ $connection = dbConnect(
     db: "blog",
 );
 
-$blog = getMyBlogs($connection, $_SESSION["blog_id"]);
+$blog = getSelectedBlogs($connection, $_SESSION["blog_id"]);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['update'])) {
@@ -37,25 +37,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <form method="post">
-        <?php
-        foreach ($blog as $blog) : ?>
-            <?php if ($blog["active"] == 1) :  ?>
-                <textarea name="title" id="title" cols="10" rows="3">
-                        <?php echo $blog["title"]; ?> 
-                    </textarea>
+        
+        <?php foreach ($blog as $blog) : ?>
+       
+            <textarea name="title" id="title" cols="10" rows="3">
+                <?php echo $blog["title"]; ?>
+           </textarea>
 
-                <br>
-                <textarea name="detail" id="detail" cols="70" rows="20">
-                    <?= $blog["detail"]; ?>
-                    </textarea>
+           <br>
+
+           <textarea name="detail" id="detail" cols="70" rows="20">
+                <?= $blog["detail"]; ?>
+           </textarea>  
+            
+           <br>
+                <form method="post">
+                    <button type = "submit" name = "update" >update</button>
+                </form>
+        <?php endforeach; ?>
+               
                     
 
-            <?php endif; ?>
-        <?php endforeach; ?>
-        <br>
-        <button type="submit" name="update">
-            update
-        </button>
-    </form>
 </body>
 </html>

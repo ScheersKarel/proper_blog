@@ -36,6 +36,9 @@ a {
 h2 {
     text-align: center;
 }
+p {
+    text-align: center;
+}
 
 button {
     background-color: rgb(218, 217, 217);

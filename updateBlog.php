@@ -2,6 +2,8 @@
 session_start();
 include "./functions/database.php";
 include "./functions/helpers.php";
+include "classes/Blog.php";
+include "classes/DB.php";
 
 if (empty($_SESSION["id"])) {
     header("location: login.php");
@@ -14,11 +16,11 @@ $connection = dbConnect(
 );
 
 $blog = getSelectedBlogs($connection, $_SESSION["blog_id"]);
-
+$blog_id = $_SESSION['blog_id'];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['update'])) {
-        $id = $_SESSION['blog_id'];
-        updateBlog($connection, $id);
+        
+        updateBlog($connection, $blog_id);
     }
 }
 

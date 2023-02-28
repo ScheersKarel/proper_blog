@@ -36,6 +36,16 @@ class Blog {
         $blogs = $stmt->fetchAll();
         return $blogs;
     }
+
+    public static function getSelectedBlogs($blog_id){
+        
+            $db = DB::getInstance();
+            $stmt = $db->prepare("SELECT * FROM `blogs` WHERE active = 1 AND id = $blog_id");
+            $stmt->execute();
+            $blogs = $stmt->fetchAll();
+            return $blogs;
+        
+    }
 }
     /*
     

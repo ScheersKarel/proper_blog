@@ -62,28 +62,19 @@
         exit();
     }
 
-    function updateBlog(PDO $connection, string $id ): void
+    function updateBlog(PDO $connection, string $blog_id ): void
     {
-        $settitle= $connection->prepare("UPDATE `blogs` SET `title`=:title WHERE id = $id ");
+        $settitle= $connection->prepare("UPDATE `blogs` SET `title`=:title WHERE id = $blog_id ");
         $settitle->bindParam(":title", htmlspecialchars($_POST["title"], ENT_QUOTES));
         $settitle->execute();
   
-         $setdetail = $connection->prepare("UPDATE `blogs` SET `detail`=:detail WHERE id = $id");
+         $setdetail = $connection->prepare("UPDATE `blogs` SET `detail`=:detail WHERE id = $blog_id");
          $setdetail->bindParam(":detail", htmlspecialchars($_POST["detail"], ENT_QUOTES));
          $setdetail->execute();
           header("Location: CRUD.php");
     }
 
-    function createBlog(PDO $connection, int $id, string $title,string $detail):void
-    {
-        $update = $connection->prepare("INSERT INTO `blogs`(`user_id`,`title`, `detail`) VALUES (:id, :title, :detail)");
-        $update->bindParam(":id", $id);
-        $update->bindParam(":title", $title);
-        $update->bindParam(":detail", $detail);
-        $update->execute();
-        header("location: CRUD.php");
-    }
-
+    
     function registreer(PDO $connection, string $first_name, string $last_name, string $email, string $ww):void
     {
         $update = $connection->prepare("INSERT INTO `user`(`first_name`, `last_name`, `email`, `password`) VALUES (:first_name, :last_name, :email, :ww)");

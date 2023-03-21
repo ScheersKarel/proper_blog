@@ -11,7 +11,7 @@ session_start();
 $connection = dbConnect(
     user: "root",
     pass: "",
-    db: "blog",
+    db: "ksblog",
 );
 
 $blog = Blog::getBlogs();

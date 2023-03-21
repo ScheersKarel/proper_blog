@@ -10,7 +10,7 @@ include "classes/User.php";
 $connection = dbConnect(
     user: "root",
     pass: "",
-    db: "blog",
+    db: "ksblog",
 );
 
 

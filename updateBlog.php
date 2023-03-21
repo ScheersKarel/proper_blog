@@ -12,7 +12,7 @@ if (empty($_SESSION["id"])) {
 $connection = dbConnect(
     user: "root",
     pass: "",
-    db: "blog",
+    db: "ksblog",
 );
 
 $blog = Blog::getSelectedBlogs($_SESSION["blog_id"]);

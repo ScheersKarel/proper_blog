@@ -9,9 +9,9 @@ include "classes/Blog.php";
 session_start();
 
 $connection = dbConnect(
-    user: "root",
-    pass: "",
-    db: "ksblog",
+    user: "ID211210_ksblog",
+    pass: "1234abcd",
+    db: "ID211210_ksblog",
 );
 
 $blog = Blog::getBlogs();

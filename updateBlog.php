@@ -10,9 +10,9 @@ if (empty($_SESSION["id"])) {
 }
 
 $connection = dbConnect(
-    user: "root",
-    pass: "",
-    db: "ksblog",
+    user: "ID211210_ksblog",
+    pass: "1234abcd",
+    db: "ID211210_ksblog",
 );
 
 $blog = Blog::getSelectedBlogs($_SESSION["blog_id"]);

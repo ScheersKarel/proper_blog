@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+ob_start();
+
 include "./functions/database.php";
 include "./functions/helpers.php";
 
@@ -17,7 +19,6 @@ $connection = dbConnect(
 );
 
 $blog = getMyBlogs($connection, $_SESSION["id"]);
-echo $_SESSION["id"];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['detail'])) {
@@ -31,11 +32,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (isset($_POST['update'])) {
+        
         $_SESSION["blog_id"] = $_POST["id"];
         header("location: updateBlog.php");
     }
 }
-
 
 ?>
 
@@ -63,7 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         </nav>
         
-
         <?php foreach ($blog as $blog) : ?>
             <?php if ($blog["active"] == 1) :  ?>
 
@@ -86,11 +86,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </form>
             <?php endif; ?>
-        <?php endforeach; ?>
+        <?php endforeach; ob_end_flush();?>
 
     </div>
 
-
+    
 </body>
 
 </html>

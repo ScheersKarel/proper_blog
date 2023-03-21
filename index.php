@@ -6,9 +6,9 @@ include "./functions/helpers.php";
 session_start();
 
 $connection = dbConnect(
-    user: "root",
-    pass: "",
-    db: "blog",
+    user: "ID211210_ksblog",
+    pass: "1234abcd",
+    db: "ID211210_ksblog",
 );
 $blog = getAllBlogs($connection);
 

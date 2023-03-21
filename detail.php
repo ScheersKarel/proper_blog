@@ -5,9 +5,9 @@ include "./functions/database.php";
 include "./functions/helpers.php";
 
 $connection = dbConnect(
-    user: "root",
-    pass: "",
-    db: "blog",
+    user: "ID211210_ksblog",
+    pass: "1234abcd",
+    db: "ID211210_ksblog",
 );
 
 $blog = getSelectedBlogs($connection, $_SESSION["blog_id"]);

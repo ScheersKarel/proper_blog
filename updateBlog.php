@@ -8,9 +8,9 @@ if (empty($_SESSION["id"])) {
 }
 
 $connection = dbConnect(
-    user: "root",
-    pass: "",
-    db: "blog",
+    user: "ID211210_ksblog",
+    pass: "1234abcd",
+    db: "ID211210_ksblog",
 );
 
 $blog = getSelectedBlogs($connection, $_SESSION["blog_id"]);

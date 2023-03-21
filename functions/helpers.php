@@ -11,7 +11,7 @@
     {
        $blog = $connection->query("SELECT * FROM blogs WHERE active = 1 AND user_id = $id")-> fetchAll();
 
-        return $blog;
+        return $blog; 
     }
     function getSelectedBlogs(PDO $connection, $id):array
     {

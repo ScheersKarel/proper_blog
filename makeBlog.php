@@ -2,10 +2,7 @@
 
 declare(strict_types=1);
 session_start();
-include "./functions/database.php";
-include "./functions/helpers.php";
-include "classes/DB.php";
-include "classes/Blog.php";
+include "components/includes.php";
 
 if (empty($_SESSION["id"])) {
     header("location: login.php");

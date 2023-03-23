@@ -1,11 +1,7 @@
 <?php
 session_start();
 
-include "./functions/database.php";
-include "./functions/helpers.php";
-include "classes/DB.php";
-include "classes/Blog.php";
-include "classes/User_like_blog.php";
+include "components/includes.php";
 
 $connection = dbConnect();
 
@@ -17,7 +13,6 @@ if(empty($user_id) ){
 }
 
 $user_id = $_SESSION["id"];
-
 $blog_id = $_SESSION["blog_id"];
 
 if(isset($_POST['like']))
@@ -43,15 +38,12 @@ $likes = $getLikes->fetch();
     <link rel="stylesheet" href="index.css">
     <title>Document</title>
 </head>
-        <nav>
-            <a href="index.php">All blogs</a> 
-            <a href="CRUD.php">My blogs</a> 
-            <a href="registreer.php">registeer</a> 
-            <a href="login.php">login</a>
-
-        </nav>
        
 <body>
+    <div class="container">
+    <nav>
+            <?php include "components/nav.html"; ?>
+    </nav>  
     <?php
     foreach ($blog as $blog) : ?>
        
@@ -69,6 +61,7 @@ $likes = $getLikes->fetch();
            
         <?php endif; ?>
     <?php endforeach; ?>
+    </div>
 </body>
 
 </html>

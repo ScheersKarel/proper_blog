@@ -20,7 +20,7 @@ $wachtwoordError = $_SESSION["WachtwoordError"];
 </head>
 
 <body>
-    <form action = "checks/loginCheck.php" method="post">
+    <form action = "loginCheck.php" method="post">
         <table>
             <tr>
                 <td> <label>email</label></td>

@@ -9,11 +9,6 @@ include "classes/User_like_blog.php";
 $connection = dbConnect();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    if (isset($_POST['detail'])) {
-        $_SESSION["blog_id"] = $_POST["id"];
-        header("location: detail.php");
-    }
-
     if (isset($_POST['delete'])) {
         $id = $_POST["id"];
         deleteBlog($connection, $id);

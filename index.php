@@ -6,8 +6,11 @@ include "components/includes.php";
 session_start();
 
 $connection = dbConnect();
-
-$blog = Blog::getBlogs();
+$blog = Blog::getBlogs($connection);
+if (isset($_POST['detail'])) {
+    $_SESSION["blog_id"] = $_POST["id"];
+    header("location: detail.php");
+}
    
 ?>
 
@@ -30,7 +33,7 @@ $blog = Blog::getBlogs();
         <?php foreach($blog as $blog): ?>
           
 
-            <form action="formActions.php" method="post">
+            <form method="post">
                 <div>
                     <input type="hidden" name="id" value=" <?= $blog['id']; ?>">
                         <button type="submit" name="detail" >

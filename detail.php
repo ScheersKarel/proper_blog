@@ -14,6 +14,11 @@ if(empty($user_id) ){
 
 $user_id = $_SESSION["id"];
 $blog_id = $_SESSION["blog_id"];
+if (isset($_POST['detail'])) {
+    $_SESSION["blog_id"] = $_POST["id"];
+    header("location: detail.php");
+}
+
 
 if(isset($_POST['like']))
 {
@@ -21,7 +26,6 @@ if(isset($_POST['like']))
     $user_like_blog = new User_like_blog($blog_id, $user_id);
     $user_like_blog->like();
 }
-
 
 $getLikes = $connection->prepare("SELECT likes FROM `blogs` WHERE id = :blog_id ");
 $getLikes->bindParam(":blog_id", $blog_id);

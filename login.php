@@ -2,11 +2,7 @@
 session_start();
 include "./functions/database.php";
 
-$connection = dbConnect(
-    user: "ID211210_ksblog",
-    pass: "1234abcd",
-    db: "ID211210_ksblog",
-);
+$connection = dbConnect();
 
 
 

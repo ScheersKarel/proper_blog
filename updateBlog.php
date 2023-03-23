@@ -9,11 +9,7 @@ if (empty($_SESSION["id"])) {
     header("location: login.php");
 }
 
-$connection = dbConnect(
-    user: "ID211210_ksblog",
-    pass: "1234abcd",
-    db: "ID211210_ksblog",
-);
+$connection = dbConnect();
 
 $blog = Blog::getSelectedBlogs($_SESSION["blog_id"]);
 $blog_id = $_SESSION['blog_id'];

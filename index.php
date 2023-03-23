@@ -8,11 +8,7 @@ include "classes/Blog.php";
 
 session_start();
 
-$connection = dbConnect(
-    user: "ID211210_ksblog",
-    pass: "1234abcd",
-    db: "ID211210_ksblog",
-);
+$connection = dbConnect();
 
 $blog = Blog::getBlogs();
 

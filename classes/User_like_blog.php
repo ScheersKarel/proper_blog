@@ -17,8 +17,6 @@ class User_like_blog{
 
     public function like(): void{
         $db = DB::getInstance();
-        echo($this->blog_id);
-        echo($this->user_id);
         $userliked = $db->query("SELECT user_id FROM `user_like_blog` WHERE blog_id = $this->blog_id")->fetch();
         if($userliked !== false && $this->user_id == $userliked['user_id']){
             echo "you already liked this post";

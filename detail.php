@@ -7,11 +7,7 @@ include "classes/DB.php";
 include "classes/Blog.php";
 include "classes/User_like_blog.php";
 
-$connection = dbConnect(
-    user: "ID211210_ksblog",
-    pass: "1234abcd",
-    db: "ID211210_ksblog",
-);
+$connection = dbConnect();
 
 $blog = Blog::getSelectedBlogs($_SESSION["blog_id"]);
 

@@ -31,7 +31,8 @@ class Blog {
 
     public static function getMyBlogs($user_id): array  {
         $db = DB::getInstance();
-        $stmt = $db->prepare("SELECT * FROM `blogs` WHERE active = 1 AND user_id = $user_id");
+        $stmt = $db->prepare("SELECT * FROM `blogs` WHERE active = 1 AND user_id = :user_id");
+        $stmt->bindparam(":user_id", $user_id);
         $stmt->execute();
         $blogs = $stmt->fetchAll();
         return $blogs;
@@ -40,7 +41,8 @@ class Blog {
     public static function getSelectedBlogs($blog_id): array {
         
             $db = DB::getInstance();
-            $stmt = $db->prepare("SELECT * FROM `blogs` WHERE active = 1 AND id = $blog_id");
+            $stmt = $db->prepare("SELECT * FROM `blogs` WHERE active = 1 AND id = :blog_id");
+            $stmt->bindparam(":blog_id", $blog_id);
             $stmt->execute();
             $blogs = $stmt->fetchAll();
             return $blogs;

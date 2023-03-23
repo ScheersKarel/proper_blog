@@ -27,11 +27,13 @@ if(isset($_POST['like']))
     $user_like_blog->like();
 }
 
-$getLikes = $connection->query("SELECT likes FROM `blogs` WHERE id = $blog_id");
+
+$getLikes = $connection->prepare("SELECT likes FROM `blogs` WHERE id = :blog_id ");
+$getLikes->bindParam(":blog_id", $blog_id);
+$getLikes->execute();
 $likes = $getLikes->fetch();
 
 ?>
-<!DOCTYPE html>
 <html lang="en">
 
 <head>

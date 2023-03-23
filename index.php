@@ -42,7 +42,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 <body>
     <div class="container">
         <nav>
-        <a href="index.php">All posts</a> 
+        <a href="index.php">All blogs</a> 
             <a href="CRUD.php">My blogs</a> 
             <a href="registreer.php">registeer</a> 
             <a href="login.php">login</a>

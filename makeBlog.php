@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <td><input type="text" name="title" id="title"> </td>
             </tr>
             <tr>
-                <td><label>detaillllls</label></td>
+                <td><label>details</label></td>
                 <td>
                     <textarea id="detail" name="detail" rows="4" cols="50">
 

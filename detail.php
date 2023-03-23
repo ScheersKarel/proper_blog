@@ -5,6 +5,7 @@ include "./functions/database.php";
 include "./functions/helpers.php";
 include "classes/DB.php";
 include "classes/Blog.php";
+include "classes/User_like_blog.php";
 
 $connection = dbConnect(
     user: "ID211210_ksblog",
@@ -14,11 +15,20 @@ $connection = dbConnect(
 
 $blog = Blog::getSelectedBlogs($_SESSION["blog_id"]);
 
+
+if(empty($user_id) ){
+
+}
+
 $user_id = $_SESSION["id"];
+
 $blog_id = $_SESSION["blog_id"];
+
 if(isset($_POST['like']))
 {
-    likeBlog($connection, $blog_id, $user_id);
+   // likeBlog($connection, $blog_id, $user_id);
+    $user_like_blog = new User_like_blog($blog_id, $user_id);
+    $user_like_blog->like();
 }
 
 $getLikes = $connection->query("SELECT likes FROM `blogs` WHERE id = $blog_id");
@@ -36,7 +46,7 @@ $likes = $getLikes->fetch();
     <title>Document</title>
 </head>
         <nav>
-            <a href="index.php">All posts</a> 
+            <a href="index.php">All blogs</a> 
             <a href="CRUD.php">My blogs</a> 
             <a href="registreer.php">registeer</a> 
             <a href="login.php">login</a>

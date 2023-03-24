@@ -3,8 +3,11 @@ session_start();
 include "components/includes.php";
 
 $connection = dbConnect();
+
+
 $emailError = $_SESSION["emailError"];
 $wachtwoordError = $_SESSION["WachtwoordError"];
+
 
 ?>
 

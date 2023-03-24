@@ -37,9 +37,10 @@ $blog = Blog::getMyBlogs($_SESSION["id"]);
                 <form action="formActions.php" method="post">
                     <div>
                         <input type="hidden" name="id" value=" <?= $blog['id']; ?>">
-                        <button type="submit" name="detail">
+                       
                             <h2> <?php echo $blog["title"]; ?></h2>
-                        </button> <br>
+                            <p><?php echo $blog["detail"] ?></p>
+                     <br>
 
                         <button name="delete">
                             delete blog

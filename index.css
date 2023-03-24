@@ -43,6 +43,7 @@ p {
 button {
     background-color: rgb(218, 217, 217);
     border: none;
+    text-align: center;
 }
 
 .error {

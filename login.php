@@ -4,9 +4,15 @@ include "components/includes.php";
 
 $connection = dbConnect();
 
+if(empty($_SESSION)){
+    $_SESSION["emailError"] = "";
+    $_SESSION["WachtwoordError"] = "";
+}
+else{
+    $emailError = $_SESSION["emailError"];
+    $wachtwoordError = $_SESSION["WachtwoordError"];
+}
 
-$emailError = $_SESSION["emailError"];
-$wachtwoordError = $_SESSION["WachtwoordError"];
 
 
 ?>

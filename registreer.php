@@ -2,6 +2,21 @@
 session_start();
 include "components/includes.php";
 $connection = dbConnect();
+
+if(empty($_SESSION)){
+    $voornaamError = "";
+    $achternaamError = "";
+    $emailError = "";
+    $wachtwoordError = "";
+    $hWachtwoordError = "";
+}
+else{
+    $voornaamError = $_SESSION["voornaamError"];
+    $achternaamError = $_SESSION["achternaamError"];
+    $emailError = $_SESSION["emailError"];
+    $wachtwoordError = $_SESSION["wachtwoordError"];
+    $hWachtwoordError = $_SESSION["hWachtwoordError"];
+}
 ?>
 
 <!DOCTYPE html>
@@ -21,27 +36,27 @@ $connection = dbConnect();
             <tr>
                 <td> <label>voornaam</label></td>
                 <td> <input type="text" name="first_name"></td>
-                <td class="error"><?= $_SESSION["voornaamError"] ?></td>
+                <td class="error"><?= $voornaamError ?></td>
             </tr>
             <tr>
                 <td> <label>achternaam</label></td>
                 <td> <input type="text" name="last_name"></td>
-                <td class="error"><?= $_SESSION["achternaamError"] ?></td>
+                <td class="error"><?= $achternaamError ?></td>
             </tr>
             <tr>
                 <td> <label>email</label></td>
                 <td> <input type="text" name="email"></td>
-                <td class="error"><?= $_SESSION["emailError"] ?></td>
+                <td class="error"><?= $emailError ?></td>
             </tr>
             <tr>
                 <td> <label>wachtwoord</label></td>
                 <td> <input type="password" name="password"></td>
-                <td class="error"><?= $_SESSION["wachtwoordError"] ?></td>
+                <td class="error"><?= $wachtwoordError ?></td>
             </tr>
             <tr>
                 <td> <label>herhaal wachtwoord</label></td>
                 <td> <input type="password" name="h_password"></td>
-                <td class="error"><?= $_SESSION["hWachtwoordError"] ?></td>
+                <td class="error"><?= $hWachtwoordError ?></td>
             </tr>
             <tr>
                 <td colspan="2"> <input type="submit" name="registreer" value="registreer"></td>

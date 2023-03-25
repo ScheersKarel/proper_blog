@@ -1,61 +1,20 @@
 <?php
 session_start();
-include "./functions/database.php";
+include "components/includes.php";
 
-$connection = dbConnect(
-    user: "ID211210_ksblog",
-    pass: "1234abcd",
-    db: "ID211210_ksblog",
-);
+$connection = dbConnect();
 
-
-
-$errorcount = 0;
-$emailError = "";
-$wachtwoordError = "";
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = htmlspecialchars($_POST["email"], ENT_QUOTES);
-    $password = htmlspecialchars($_POST["password"], ENT_QUOTES);
-
-
-    $userPassword = $connection->prepare("SELECT password FROM `user` WHERE email = :email");
-    $userPassword->bindParam(":email", $email);
-    $userPassword->execute();
-
-    $userID = $connection->prepare("SELECT id FROM `user` WHERE email = :email");
-    $userID->bindParam(":email", $email);
-    $userID->execute();
-
-    $res = $userPassword->fetch();
-    $id = $userID->fetch();
-
-    if (isset($_POST['login'])) {
-
-        if (empty($email)) {
-            $emailError = "email is leeg";
-            $errorcount++;
-        }
-
-        if (empty($password)) {
-            $wachtwoordError = "wachtwoord is leeg";
-            $errorcount++;
-        }
-        if (!empty($res)) {
-            if (password_verify($password, $res[0])) {
-                $_SESSION["id"] = $id[0];
-                header("location: CRUD.php");
-            } else {
-                $emailError = "email and/or wachtwoord are incorrect";
-            }
-        } else {
-            $emailError =  "email bestaat niet";
-        }
-    }
-    if (isset($_POST['registreer'])) {
-        header("location: registreer.php");
-    }
+if(empty($_SESSION)){
+    $_SESSION["emailError"] = "";
+    $_SESSION["WachtwoordError"] = "";
 }
+else{
+    $emailError = $_SESSION["emailError"];
+    $wachtwoordError = $_SESSION["WachtwoordError"];
+}
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -70,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-    <form method="post">
+    <form action = "loginCheck.php" method="post">
         <table>
             <tr>
                 <td> <label>email</label></td>
@@ -80,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <tr>
                 <td> <label>wachtwoord</label></td>
                 <td> <input type="password" name="password"></td>
-                <td class="error"><?= $wachtwoordError ?></td>
+                <td class="error"><?php if($wachtwoordError == "") echo "";  ?></td>
             </tr>
 
             <tr>

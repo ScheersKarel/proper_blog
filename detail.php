@@ -1,28 +1,38 @@
 <?php
 session_start();
 
-include "./functions/database.php";
-include "./functions/helpers.php";
+include "components/includes.php";
 
-$connection = dbConnect(
-    user: "ID211210_ksblog",
-    pass: "1234abcd",
-    db: "ID211210_ksblog",
-);
+$connection = dbConnect();
 
-$blog = getSelectedBlogs($connection, $_SESSION["blog_id"]);
-$user_id = $_SESSION["id"];
-$blog_id = $_SESSION["blog_id"];
-if(isset($_POST['like']))
-{
-    likeBlog($connection, $blog_id, $user_id);
+$blog = Blog::getSelectedBlogs($_SESSION["blog_id"]);
+
+
+if(empty($user_id) ){
+
 }
 
-$getLikes = $connection->query("SELECT likes FROM `blogs` WHERE id = $blog_id");
+$user_id = $_SESSION["id"];
+$blog_id = $_SESSION["blog_id"];
+if (isset($_POST['detail'])) {
+    $_SESSION["blog_id"] = $_POST["id"];
+    header("location: detail.php");
+}
+
+
+if(isset($_POST['like']))
+{
+   // likeBlog($connection, $blog_id, $user_id);
+    $user_like_blog = new User_like_blog($blog_id, $user_id);
+    $user_like_blog->like();
+}
+
+$getLikes = $connection->prepare("SELECT likes FROM `blogs` WHERE id = :blog_id ");
+$getLikes->bindParam(":blog_id", $blog_id);
+$getLikes->execute();
 $likes = $getLikes->fetch();
 
 ?>
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -32,15 +42,12 @@ $likes = $getLikes->fetch();
     <link rel="stylesheet" href="index.css">
     <title>Document</title>
 </head>
-        <nav>
-            <a href="index.php">All posts</a> 
-            <a href="CRUD.php">My blogs</a> 
-            <a href="registreer.php">registeer</a> 
-            <a href="login.php">login</a>
-
-        </nav>
        
 <body>
+    <div class="container">
+    <nav>
+            <?php include "components/nav.html"; ?>
+    </nav>  
     <?php
     foreach ($blog as $blog) : ?>
        
@@ -58,6 +65,7 @@ $likes = $getLikes->fetch();
            
         <?php endif; ?>
     <?php endforeach; ?>
+    </div>
 </body>
 
 </html>

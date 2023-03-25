@@ -1,73 +1,22 @@
 <?php
 session_start();
-include "./functions/database.php";
-include "./functions/helpers.php";
+include "components/includes.php";
+$connection = dbConnect();
 
-$connection = dbConnect(
-    user: "ID211210_ksblog",
-    pass: "1234abcd",
-    db: "ID211210_ksblog",
-);
-
-$voornaamError = "";
-$achternaamError = "";
-$emailError = "";
-$wachtwoordError = "";
-$hWachtwoordError = "";
-$errorcount = 0;
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    $first_name = htmlspecialchars($_POST["first_name"], ENT_QUOTES);
-    $last_name = htmlspecialchars($_POST["last_name"], ENT_QUOTES);
-    $email = htmlspecialchars($_POST["email"], ENT_QUOTES);
-    $password = htmlspecialchars($_POST["password"], ENT_QUOTES);
-    $hPassword = htmlspecialchars($_POST["h_password"], ENT_QUOTES);
-
-
-    if (isset($_POST['registreer'])) {
-        if (empty($first_name)) {
-            $voornaamError = "voornaam is leeg";
-            $errorcount++;
-        }
-        if (empty($last_name)) {
-            $achternaamError = "achternaam is leeg";
-            $errorcount++;
-        }
-        if (empty($email)) {
-            $emailError = "email is leeg";
-            $errorcount++;
-        }
-        $emailFromDB = $connection->prepare("SELECT * FROM user WHERE email=:email");
-        $emailFromDB->bindParam(":email", $email);
-        $emailFromDB->execute();
-        $user = $emailFromDB->fetch();
-        if ($user) {
-            $emailError = "email bestaat al";
-            $errorcount++;
-        }
-
-        if (empty($password)) {
-            $wachtwoordError = "wachtwoord is leeg";
-            $errorcount++;
-        }
-        if (empty($hPassword)) {
-            $hWachtwoordError = "herhaal wachtwoord is leeg";
-            $errorcount++;
-        }
-        if ($password != $hPassword) {
-            $hWachtwoordError = "wachtwoorden komen niet overeen";
-            $errorcount++;
-        } else {
-            $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
-            $_SESSION["password"] = $password;
-        }
-        if ($errorcount == 0) {
-            registreer($connection, $first_name, $last_name, $email, $password);
-        }
-    }
+if(empty($_SESSION)){
+    $voornaamError = "";
+    $achternaamError = "";
+    $emailError = "";
+    $wachtwoordError = "";
+    $hWachtwoordError = "";
 }
-
+else{
+    $voornaamError = $_SESSION["voornaamError"];
+    $achternaamError = $_SESSION["achternaamError"];
+    $emailError = $_SESSION["emailError"];
+    $wachtwoordError = $_SESSION["wachtwoordError"];
+    $hWachtwoordError = $_SESSION["hWachtwoordError"];
+}
 ?>
 
 <!DOCTYPE html>
@@ -82,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-    <form method="post">
+    <form action="registreerCheck.php" method="post">
         <table>
             <tr>
                 <td> <label>voornaam</label></td>

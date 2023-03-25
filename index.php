@@ -1,27 +1,15 @@
 <?php
 declare(strict_types = 1);
 
-include "./functions/database.php";
-include "./functions/helpers.php";
+include "components/includes.php";
+
 session_start();
 
-$connection = dbConnect(
-    user: "ID211210_ksblog",
-    pass: "1234abcd",
-    db: "ID211210_ksblog",
-);
-$blog = getAllBlogs($connection);
-
-
-
-if($_SERVER['REQUEST_METHOD'] === 'POST')
-{
-    if(isset($_POST['detail']))
-    {
-        $_SESSION["blog_id"] = $_POST["id"];
-        header("location: detail.php");
-    }
-   
+$connection = dbConnect();
+$blog = Blog::getBlogs($connection);
+if (isset($_POST['detail'])) {
+    $_SESSION["blog_id"] = $_POST["id"];
+    header("location: detail.php");
 }
    
 ?>
@@ -38,10 +26,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 <body>
     <div class="container">
         <nav>
-        <a href="index.php">All posts</a> 
-            <a href="CRUD.php">My blogs</a> 
-            <a href="registreer.php">registeer</a> 
-            <a href="login.php">login</a>
+        <?php include "components/nav.html"; ?>
 
         </nav>
        

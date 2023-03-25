@@ -1,24 +1,19 @@
 <?php
 session_start();
-include "./functions/database.php";
-include "./functions/helpers.php";
+include "components/includes.php";
 
 if (empty($_SESSION["id"])) {
     header("location: login.php");
 }
 
-$connection = dbConnect(
-    user: "ID211210_ksblog",
-    pass: "1234abcd",
-    db: "ID211210_ksblog",
-);
+$connection = dbConnect();
 
-$blog = getSelectedBlogs($connection, $_SESSION["blog_id"]);
-
+$blog = Blog::getSelectedBlogs($_SESSION["blog_id"]);
+$blog_id = $_SESSION['blog_id'];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['update'])) {
-        $id = $_SESSION['blog_id'];
-        updateBlog($connection, $id);
+        
+        updateBlog($connection, $blog_id);
     }
 }
 

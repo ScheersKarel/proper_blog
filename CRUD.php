@@ -2,41 +2,14 @@
 
 declare(strict_types=1);
 
-ob_start();
-
-include "./functions/database.php";
-include "./functions/helpers.php";
+include "components/includes.php";
 
 session_start();
 if (empty($_SESSION["id"])) {
     header("location: login.php");
 }
 
-$connection = dbConnect(
-    user: "ID211210_ksblog",
-    pass: "1234abcd",
-    db: "ID211210_ksblog",
-);
-
-$blog = getMyBlogs($connection, $_SESSION["id"]);
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['detail'])) {
-        $_SESSION["blog_id"] = $_POST["id"];
-        header("location: detail.php");
-    }
-
-    if (isset($_POST['delete'])) {
-        $id = $_POST["id"];
-        deleteBlog($connection, $id);
-    }
-
-    if (isset($_POST['update'])) {
-        
-        $_SESSION["blog_id"] = $_POST["id"];
-        header("location: updateBlog.php");
-    }
-}
+$blog = Blog::getMyBlogs($_SESSION["id"]);
 
 ?>
 
@@ -54,30 +27,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="container">
         <nav>
-
             <a href="makeBlog.php">Create new blog</a>
-           
-            <a href="index.php">All posts</a> 
-            <a href="CRUD.php">My blogs</a> 
-            <a href="registreer.php">registeer</a> 
-            <a href="login.php">login</a>
-
+            <?php include "components/nav.html"; ?>
         </nav>
         
         <?php foreach ($blog as $blog) : ?>
-            <?php if ($blog["active"] == 1) :  ?>
 
-                <form method="post">
+                <form action="formActions.php" method="post">
                     <div>
                         <input type="hidden" name="id" value=" <?= $blog['id']; ?>">
-                        <button type="submit" name="detail">
+                       
                             <h2> <?php echo $blog["title"]; ?></h2>
-                        </button> <br>
+                            <p><?php echo $blog["detail"] ?></p>
+                     <br>
 
                         <button name="delete">
                             delete blog
                         </button>
-
 
                         <button name="update">
                             update blog
@@ -85,8 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     </div>
                 </form>
-            <?php endif; ?>
-        <?php endforeach; ob_end_flush();?>
+        <?php endforeach; ?>
 
     </div>
 

@@ -33,24 +33,27 @@ $blog = Blog::getMyBlogs($_SESSION["id"]);
         
         <?php foreach ($blog as $blog) : ?>
 
-                <form action="formActions.php" method="post">
-                    <div>
-                        <input type="hidden" name="id" value=" <?= $blog['id']; ?>">
-                       
-                            <h2> <?php echo $blog["title"]; ?></h2>
-                            <p><?php echo $blog["detail"] ?></p>
-                     <br>
+            <form action="formActions.php" method="post">
+                <div>
+                    <input type="hidden" name="id" value=" <?= $blog['id']; ?>">
 
-                        <button name="delete">
-                            delete blog
-                        </button>
+                    <h2> <?php echo $blog["title"]; ?></h2>
 
-                        <button name="update">
-                            update blog
-                        </button>
+                    <p><?php echo $blog["detail"] ?></p>
+                    
 
-                    </div>
-                </form>
+                    <button name="update">
+                        update blog
+                    </button>
+
+                    <button name="delete">
+                        delete blog
+                    </button>
+
+
+
+                </div>
+            </form>
         <?php endforeach; ?>
 
     </div>

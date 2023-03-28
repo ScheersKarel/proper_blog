@@ -36,7 +36,7 @@ if (isset($_POST['detail'])) {
             <form method="post">
                 <div>
                     <input type="hidden" name="id" value=" <?= $blog['id']; ?>">
-                        <button type="submit" name="detail" >
+                        <button type="submit" name="detail" class="blogButton" >
                         <h2> <?php echo $blog["title"]; ?></h2>
                         </button>
                 

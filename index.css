@@ -5,11 +5,10 @@
     padding: 10px;
 }
 
-
 nav {
     margin-left: 55%;
     font-size: larger;
-
+    margin-bottom: 50px;
 }
 
 #like {
@@ -42,10 +41,19 @@ p {
 
 button {
     background-color: rgb(218, 217, 217);
+    border: 1px solid black;
+    margin-left: 47%;
+}
+.blogButton{
+    background-color: rgb(218, 217, 217);
     border: none;
     text-align: center;
+    margin-left: 0px;
 }
 
 .error {
     color: red;
+}
+span{
+    color: blue;
 }

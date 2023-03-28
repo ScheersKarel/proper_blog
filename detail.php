@@ -7,18 +7,8 @@ $connection = dbConnect();
 
 $blog = Blog::getSelectedBlogs($_SESSION["blog_id"]);
 
-
-if(empty($user_id) ){
-
-}
-
 $user_id = $_SESSION["id"];
 $blog_id = $_SESSION["blog_id"];
-if (isset($_POST['detail'])) {
-    $_SESSION["blog_id"] = $_POST["id"];
-    header("location: detail.php");
-}
-
 
 if(isset($_POST['like']))
 {
@@ -55,16 +45,23 @@ $likes = $getLikes->fetch();
                 <?php echo $blog["title"]; ?>
             </h2>
             <p>
-                <?= $blog["detail"]; ?>
-            </p>
+                <?= $blog["detail"]; ?> <br> <br>
+            
             <?php if(!empty($_SESSION["id"])): ?>
             <form method="post">
                 <button type = "submit" name = "like" >like</button>
                 <?= $likes[0]." likes" ?>
             </form>
            
-        <?php endif; ?>
-    <?php endforeach; ?>
+            <?php 
+             endif;
+            if (empty($_SESSION["id"])) {
+               echo "<span><a href='login.php'>login to like</a></span>";
+            }
+            
+            endforeach;
+            ?>
+            </p>
     </div>
 </body>
 

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include "./functions/database.php";
 include "./functions/helpers.php";
 include "classes/DB.php";

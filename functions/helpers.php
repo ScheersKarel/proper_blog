@@ -48,14 +48,16 @@
 
     function updateBlog(PDO $connection, string $blog_id ): void
     {
+        $title = htmlspecialchars($_POST["title"], ENT_QUOTES);
+        $detail = htmlspecialchars($_POST["detail"], ENT_QUOTES);
         $settitle= $connection->prepare("UPDATE `blogs` SET `title`=:title WHERE id = :id ");
-        $settitle->bindParam(":title", htmlspecialchars($_POST["title"], ENT_QUOTES));
+        $settitle->bindParam(":title", $title);
         $settitle->bindParam(":id", $blog_id );
         $settitle->execute();
   
          $setdetail = $connection->prepare("UPDATE `blogs` SET `detail`=:detail WHERE id = :id");
-         $setdetail->bindParam(":detail", htmlspecialchars($_POST["detail"], ENT_QUOTES));
-         $settitle->bindParam(":id", $blog_id );
+         $setdetail->bindParam(":detail", $detail);
+         $setdetail->bindParam(":id", $blog_id);
          $setdetail->execute();
           header("Location: CRUD.php");
     }

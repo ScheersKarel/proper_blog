@@ -32,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <form method="post">
-        
         <?php foreach ($blog as $blog) : ?>
        
             <textarea name="title" id="title" cols="10" rows="3">
@@ -46,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
            </textarea>  
             
            <br>
-                <form method="post">
+                
                     <button type = "submit" name = "update" >update</button>
                 </form>
         <?php endforeach; ?>

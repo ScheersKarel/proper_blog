@@ -9,6 +9,7 @@ if (empty($_SESSION["id"])) {
 $connection = dbConnect();
 
 $blog = Blog::getSelectedBlogs($_SESSION["blog_id"]);
+
 $blog_id = $_SESSION['blog_id'];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['update'])) {

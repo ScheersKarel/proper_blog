@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errorcounter++;
         }
         if ($errorcounter == 0) {
-           $blog = new Blog($user_id, $_POST["title"], $_POST["detail"]);
+           $blog = new Blog($user_id, $title, $detail);
            $blog->addBlog();
         }
     }

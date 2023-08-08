@@ -9,6 +9,8 @@ $blog = Blog::getSelectedBlogs($_SESSION["blog_id"]);
 
 $user_id = $_SESSION["id"];
 $blog_id = $_SESSION["blog_id"];
+$error = $_SESSION["error"];
+
 
 if(isset($_POST['like']))
 {

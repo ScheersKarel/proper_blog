@@ -45,11 +45,11 @@ $blog = Blog::getMyBlogs($_SESSION["id"]);
                     <button name="update">
                         update blog
                     </button>
-
+                        <br><br>
                     <button name="delete">
                         delete blog
                     </button>
-
+                    <hr>
 
 
                 </div>

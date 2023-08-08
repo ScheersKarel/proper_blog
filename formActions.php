@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION["blog_id"] = $_POST["id"];
         header("location: updateBlog.php");
     }
-   
+   /*
     $title = htmlspecialchars($_POST["title"], ENT_QUOTES);
     $detail = htmlspecialchars($_POST["detail"], ENT_QUOTES);
     $errorcounter = 0;
@@ -32,9 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errorcounter++;
         }
         if ($errorcounter == 0) {
-           $blog = new Blog($user_id, $_POST["title"], $_POST["detail"]);
+           $blog = new Blog($user_id, $title, $detail);
            $blog->addBlog();
         }
     }
-   
+   */
 }

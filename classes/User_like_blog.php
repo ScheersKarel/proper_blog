@@ -20,7 +20,6 @@ class User_like_blog
         $db = DB::getInstance();
         $userliked = $db->query("SELECT user_id FROM `user_like_blog` WHERE blog_id = $this->blog_id")->fetch();
         if ($userliked !== false) {
-            $_SESSION["errorMessage"] = "you already liked this post";
             echo "you already liked this post";
         }
 

@@ -18,7 +18,12 @@ class User_like_blog
     public function like(): void
     {
         $db = DB::getInstance();
-        $userliked = $db->query("SELECT user_id FROM `user_like_blog` WHERE blog_id = $this->blog_id")->fetch();
+       // $userliked = $db->query("SELECT user_id FROM `user_like_blog` WHERE blog_id = $this->blog_id")->fetch();
+        $userliked = $db->prepare("SELECT user_id FROM `user_like_blog` WHERE blog_id = :blogID");
+        $userliked->bindParam(":blogID", $this->blog_id);
+        $userliked->execute();
+        $userliked = $userliked->fetch();
+        
         if ($userliked !== false) {
             echo "you already liked this post";
         }
@@ -31,7 +36,9 @@ class User_like_blog
             $stmt->bindParam(":like", $this->likes);
             $stmt->execute();
 
-            $getLikes = $db->query("SELECT likes FROM `blogs` WHERE id = $this->blog_id");
+            //$getLikes = $db->query("SELECT likes FROM `blogs` WHERE id = $this->blog_id");
+            $getLikes = $db->prepare("SELECT likes FROM `blogs` WHERE id = :blogID");
+            $getLikes->bindParam(":blogID", $this->blog_id);
             $likes = $getLikes->fetch();
 
             $setlikes = $db->prepare("UPDATE `blogs` SET `likes`=:likes WHERE id = :id ");

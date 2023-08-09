@@ -3,20 +3,12 @@ session_start();
 include "components/includes.php";
 $connection = dbConnect();
 
-if(empty($_SESSION)){
-    $voornaamError = "";
-    $achternaamError = "";
-    $emailError = "";
-    $wachtwoordError = "";
-    $hWachtwoordError = "";
-}
-else{
-    $voornaamError = $_SESSION["voornaamError"];
-    $achternaamError = $_SESSION["achternaamError"];
-    $emailError = $_SESSION["emailError"];
-    $wachtwoordError = $_SESSION["wachtwoordError"];
-    $hWachtwoordError = $_SESSION["hWachtwoordError"];
-}
+$voornaamError = $_SESSION["voornaamError"];
+$achternaamError = $_SESSION["achternaamError"];
+$emailError = $_SESSION["emailError"];
+$wachtwoordError = $_SESSION["wachtwoordError"];
+$hWachtwoordError = $_SESSION["hWachtwoordError"];
+
 ?>
 
 <!DOCTYPE html>
